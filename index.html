@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CS 194-26 Project 2 - Xingyu Jin</title>
+    <link href="css/main.css" media="Screen" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<h1 align="center">Fun with Filters and Frequencies!</h1>
+<h3 align="center">Xingyu Jin &lt; xingyu.jin21@berkeley.edu &gt; </h3>
+<h2>Background</h2>
+<p>
+    This project will explore many concepts of different filtering algorithm. Also, the project will
+    play around with frequencies of images and produce cool pictures.
+</p>
+
+
+<h2>Part 1: Fun with Filters</h2>
+<h3>1.1 Finite Difference Operator</h3>
+<p>
+    By using the humble finite difference Dx=[1, -1] and Dy=[1, -1]^T, we can get the partical derivative
+    in x and y of the cameraman image. Then we can calculating the gradient magnitude image through the
+    formula sqrt(xPD^2 + yPD^2). Thereafter, we can binarize the gradient magnitude image and show all
+    the real edges. I iterated through 50 values from 0 to 1, and finally decided on value 0.15 as my
+    threshold to produce best image. The resulting images are as follows:
+</p>
+<div class="img-container">
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="cMan_xPD" height="400" src="img/out/cMan/cman_xPD.jpg" width="600">
+            <div class="desc">X partial derivative</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="cMan_yPD" height="400" src="img/out/cMan/cman_yPD.jpg" width="600">
+            <div class="desc">Y partial derivative</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="cMan_grad" height="400" src="img/out/cMan/cman_grad.jpg" width="600">
+            <div class="desc">Gradient Magnitude Image</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="cMan_gradBi" height="400" src="img/out/cMan/cman_gradBi0_15.jpg" width="600">
+            <div class="desc">Binarized Gradient Magnitude Image</div>
+        </div>
+    </div>
+</div>
+
+
+<h3>1.2 Derivative of Gaussian (DoG) Filter</h3>
+<p>
+    To suppress noises, we decided to use a Gaussian filter G. There are two free parameters of
+    the Gaussian filter, and I tried different value of kernel size and decide the sigma as well as
+    the binarize threshold accordingly. The images are as follows:
+</p>
+<div class="big-img-container">
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="cMan_dog3" height="400" src="img/out/cMan/cman_dog3.jpg" width="600">
+                <div class="desc">Filtered Image w/ ksize 3</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="cMan_dog3_xpd" height="200" src="img/out/cMan/cman_dog3_xpd.jpg" width="300">
+                <img alt="cMan_dog3_ypd" height="200" src="img/out/cMan/cman_dog3_ypd.jpg" width="300">
+                <div class="desc">Partial derivatives</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="cMan_dog3_grad" height="400" src="img/out/cMan/cman_dog3_grad.jpg" width="600">
+                <div class="desc">Gradient Magnitude Image</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="cMan_dog3_gradBi0_05" height="400" src="img/out/cMan/cman_dog3_gradBi0_05.jpg" width="600">
+                <div class="desc">Binarized w/ thresh 0.05</div>
+                <img alt="cMan_dog3_gradBi0_15" height="400" src="img/out/cMan/cman_dog3_gradBi0_15.jpg" width="600">
+                <div class="desc">Binarized w/ thresh 0.15</div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="cMan_dog10" height="400" src="img/out/cMan/cman_dog10.jpg" width="600">
+                <div class="desc">Filtered Image w/ ksize 10</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="cMan_dog10_xpd" height="200" src="img/out/cMan/cman_dog10_xpd.jpg" width="300">
+                <img alt="cMan_dog10_ypd" height="200" src="img/out/cMan/cman_dog10_ypd.jpg" width="300">
+                <div class="desc">Partial derivatives</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="cMan_dog10_grad" height="400" src="img/out/cMan/cman_dog10_grad.jpg" width="600">
+                <div class="desc">Gradient Magnitude Image</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="cMan_dog10_gradBi0_05" height="400" src="img/out/cMan/cman_dog10_gradBi0_05.jpg" width="600">
+                <div class="desc">Binarized w/ thresh 0.05</div>
+                <img alt="cMan_dog10_gradBi0_15" height="400" src="img/out/cMan/cman_dog10_gradBi0_15.jpg" width="600">
+                <div class="desc">Binarized w/ thresh 0.15</div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="cMan_dog20" height="400" src="img/out/cMan/cman_dog20.jpg" width="600">
+                <div class="desc">Filtered Image w/ ksize 20</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="cMan_dog20_xpd" height="200" src="img/out/cMan/cman_dog20_xpd.jpg" width="300">
+                <img alt="cMan_dog20_ypd" height="200" src="img/out/cMan/cman_dog20_ypd.jpg" width="300">
+                <div class="desc">Partial derivatives</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="cMan_dog20_grad" height="400" src="img/out/cMan/cman_dog20_grad.jpg" width="600">
+                <div class="desc">Gradient Magnitude Image</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="cMan_dog20_gradBi0_02" height="400" src="img/out/cMan/cman_dog20_gradBi0_02.jpg" width="600">
+                <div class="desc">Binarized w/ thresh 0.02</div>
+                <img alt="cMan_dog20_gradBi0_05" height="400" src="img/out/cMan/cman_dog20_gradBi0_05.jpg" width="600">
+                <div class="desc">Binarized w/ thresh 0.05</div>
+                <img alt="cMan_dog20_gradBi0_15" height="400" src="img/out/cMan/cman_dog20_gradBi0_15.jpg" width="600">
+                <div class="desc">Binarized w/ thresh 0.15</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    As we can see, the gaussian filter made the image blurrier and thus can avoid certain noises and produce
+    better edge image. And the bigger ksize is, the more blurry
+    the resulted image is. Also, the bigger ksize is, the small the binarization threshold is in order to
+    identify the edges.
+</p>
+
+<p>
+    Then we convolve the gaussian with Dx and Dy so that we can do the same with with a single convolution.
+    In the following images, I used kernel size 10 and binarization threshold 0.05. This one-pass procedure
+    produce the same result as before.
+</p>
+<div class="img-container">
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="dog_XPD" height="400" src="img/out/cMan/dog_XPD.jpg" width="600">
+            <div class="desc">DoG for X</div>
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="dog_YPD" height="400" src="img/out/cMan/dog_YPD.jpg" width="600">
+            <div class="desc">DoG for Y</div>
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="onePass10_005" height="400" src="img/out/cMan/onePass10_005.jpg" width="600">
+            <div class="desc">One Pass conv result</div>
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="onePassBi10_005" height="400" src="img/out/cMan/onePassBi10_005.jpg" width="600">
+            <div class="desc">One Pass conv result w/ Binarization</div>
+        </div>
+    </div>
+</div>
+
+<h3>1.3 Image Straightening</h3>
+<p>
+    In this part, we would like to auto-straighten an image based on the number of vertical and horizontal
+    edges. In order to do so, I used the edge detection method in 1.2 with gaussian filters. And use
+    arctan(dy/dx) to get the orientation of each pixel. Thereafter, I check the number of pixels whose
+    orientation is close to vertical and horizontal. I tried all angles from -10 to 10 with step 0.2 degree.
+    After rotation, I cropped the image to only consider the orientation of pixels at the center of the image.
+    My final choice is the rotation angle that maximize the number of vertical and horizontal edges. The
+    results are as follows:
+</p>
+
+<div class="big-img-container">
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="facade" height="400" src="img/input/facade.jpg" width="600">
+                <div class="desc">Original Picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="facade_ori_hist" height="400" src="img/out/straighten/facade_ori_hist.jpg"
+                     width="600">
+                <div class="desc">Original Angle Histogram</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="facade_straight" height="400" src="img/out/straighten/facade_straight.jpg" width="600">
+                <div class="desc">Straighened Picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="facade_straight_hist" height="400" src="img/out/straighten/facade_straight_hist.jpg"
+                     width="600">
+                <div class="desc">Angle Histogram</div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="building" height="400" src="img/input/building.jpg" width="600">
+                <div class="desc">Original Picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="building_ori_hist" height="400" src="img/out/straighten/building_ori_hist.jpg"
+                     width="600">
+                <div class="desc">Original Angle Histogram</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="building_straight" height="400" src="img/out/straighten/building_straight.jpg" width="600">
+                <div class="desc">Straighened Picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="building_straight_hist" height="400" src="img/out/straighten/building_straight_hist.jpg"
+                     width="600">
+                <div class="desc">Angle Histogram</div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="roof" height="400" src="img/input/roof.jpg" width="600">
+                <div class="desc">Original Picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="roof_ori_hist" height="400" src="img/out/straighten/roof_ori_hist.jpg"
+                     width="600">
+                <div class="desc">Original Angle Histogram</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="roof_straight" height="400" src="img/out/straighten/roof_straight.jpg" width="600">
+                <div class="desc">Straighened Picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="roof_straight_hist" height="400" src="img/out/straighten/roof_straight_hist.jpg"
+                     width="600">
+                <div class="desc">Angle Histogram</div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="window" height="400" src="img/input/window.jpg" width="600">
+                <div class="desc">Original Picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="window_ori_hist" height="400" src="img/out/straighten/window_ori_hist.jpg"
+                     width="600">
+                <div class="desc">Original Angle Histogram</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="window_straight" height="400" src="img/out/straighten/window_straight.jpg" width="600">
+                <div class="desc">Straighened Picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="window_straight_hist" height="400" src="img/out/straighten/window_straight_hist.jpg"
+                     width="600">
+                <div class="desc">Angle Histogram</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    Among many of the successful changes, there are also failures. For example, in the tower image below,
+    The auto-straightening algorithm failed a lot. I think there are two main reasons. First, the original
+    picture does not have straight edge. For example, the edge of the tower won't be vertical even when the
+    picture is straightened. Also, this image's center area has too many thin lines (noises) that can hardly
+    be smoothened by guassian filters. Therefore, the edge detection process is hard as well.
+</p>
+
+<div class="img-container">
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="tower" height="400" src="img/input/tower.jpg" width="600">
+            <div class="desc">Original Picture</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="tower_ori_hist" height="400" src="img/out/straighten/tower_ori_hist.jpg"
+                 width="600">
+            <div class="desc">Original Angle Histogram</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="tower_straight" height="400" src="img/out/straighten/tower_straight.jpg" width="600">
+            <div class="desc">Straightened Picture</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="tower_straight_hist" height="400" src="img/out/straighten/tower_straight_hist.jpg"
+                 width="600">
+            <div class="desc">Straightened Angle Histogram</div>
+        </div>
+    </div>
+</div>
+
+
+<h2>Part 2: Fun with Frequencies</h2>
+<h3>2.1 Image "Sharpening"</h3>
+<p>
+    In this part, we implemented the sharpening algorithm. To do sharpening, we first get a blurry image
+    after applying gaussian filter. We then get the "important contents" by subtracting the blurry image
+    from the original one. Then, we add the "important contents" back to the original image with a factor
+    alpha. I experimented by setting alpha = 1. The progress of the original image to the sharpened image is shown as
+    follows:
+</p>
+
+<div class="big-img-container">
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="taj" height="400" src="img/input/taj.jpg" width="600">
+                <div class="desc">Original Picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="taj_blur" height="400" src="img/out/sharpen/taj_sharp1_blur.jpg"
+                     width="600">
+                <div class="desc">Blurry picture by Gaussian filter</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="taj_sharp1_outline" height="400" src="img/out/sharpen/taj_sharp1_outline.jpg" width="600">
+                <div class="desc">Important contents</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="taj_sharp1" height="400" src="img/out/sharpen/taj_sharp1.jpg"
+                     width="600">
+                <div class="desc">Sharpened Image</div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="baby_otter" height="400" src="img/input/baby_otter.jpg" width="600">
+                <div class="desc">Original Picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="baby_otter_blur" height="400" src="img/out/sharpen/baby_otter_sharp1_blur.jpg"
+                     width="600">
+                <div class="desc">Blurry picture by Gaussian filter</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="baby_otter_sharp1_outline" height="400" src="img/out/sharpen/baby_otter_sharp1_outline.jpg"
+                     width="600">
+                <div class="desc">Important contents</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="baby_otter_sharp1" height="400" src="img/out/sharpen/baby_otter_sharp1.jpg"
+                     width="600">
+                <div class="desc">Sharpened Image</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    Thereafter, I tried to blur the image first and resharpen it. From the results, we can see the
+    resharpen process does work, but is slightly different from the original ones. Potentially,
+    a better choice of alpha will produce a better image that is closer to the original one. The results are as follows:
+</p>
+<div class="big-img-container">
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="taj" height="400" src="img/input/taj.jpg" width="600">
+                <div class="desc">Original Picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="taj_blur" height="400" src="img/out/sharpen/taj_blur10.jpg"
+                     width="600">
+                <div class="desc">Blurry picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="taj_resharp1" height="400" src="img/out/sharpen/taj_resharp1.jpg" width="600">
+                <div class="desc">Resharpen with alpha=1</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="taj_resharp5" height="400" src="img/out/sharpen/taj_resharp5.jpg" width="600">
+                <div class="desc">Resharpen with alpha=5</div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="baby_otter" height="400" src="img/input/baby_otter.jpg" width="600">
+                <div class="desc">Original Picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="baby_otter_blur" height="400" src="img/out/sharpen/baby_otter_blur10.jpg"
+                     width="600">
+                <div class="desc">Blurry picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="baby_otter_resharp1" height="400" src="img/out/sharpen/baby_otter_resharp1.jpg" width="600">
+                <div class="desc">Resharpen with alpha=1</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="baby_otter_resharp5" height="400" src="img/out/sharpen/baby_otter_resharp5.jpg" width="600">
+                <div class="desc">Resharpen with alpha=5</div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="baby_donkey" height="400" src="img/input/baby_donkey.jpg" width="600">
+                <div class="desc">Original Picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="baby_donkey_blur" height="400" src="img/out/sharpen/baby_donkey_blur10.jpg"
+                     width="600">
+                <div class="desc">Blurry picture</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="baby_donkey_resharp1" height="400" src="img/out/sharpen/baby_donkey_resharp1.jpg" width="600">
+                <div class="desc">Resharpen with alpha=1</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="baby_donkey_resharp5" height="400" src="img/out/sharpen/baby_donkey_resharp5.jpg" width="600">
+                <div class="desc">Resharpen with alpha=5</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    Also, we notice that the bigger alpha is, the sharper the resulted image is.
+</p>
+
+<h3>2.2 Hybrid Images</h3>
+<p>
+    In this part, we tried to create hybrid image using approach described in the paper by Olivia. The
+    process is to use a low-pass filter and a high-filter to filter two images respectively. Thereafter,
+    we combine the two filtered image, which will produce a hybrid image that leads to different interpretations
+    at different distances.
+</p>
+<p>
+    Both the low-pass filter and the high-pass filter are implemented through gaussian filter, so deciding on the
+    kernel size and sigma (frequency) is a very important part. To decided on which ksize and sigma I should use, I
+    experimented by controlling variable and got the following conclusions:
+</p>
+<ol>
+    <li>
+        Kernel size decide on how blurry a image can be given sigma. The bigger ksize is, the more blurry the image will
+        be
+    </li>
+    <li>
+        Sigma affects the low frequency portion of the image, where the bigger sigma is, the more "obvious" the low
+        frequency
+        proportion of the image will be. In order words, the low frequency part of the hybrid image will be clearer.
+    </li>
+    <li>
+        Sigma affects the high frequency portion of the image, where the bigger sigma is, the more "blurry" the low
+        frequency
+        proportion of the image will be. In order words, the low frequency part of the hybrid image will be less clear.
+    </li>
+</ol>
+<p>
+    Following such conclusion, I decided on the cutoff-frequency, sigma, and kernel size by deciding whether I need the
+    low/high frequency porpotion to be more/less clear. The resulted pictures are shown as follows
+</p>
+
+<div class="img-container">
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="nutmeg" height="400" src="img/input/nutmeg.jpg" width="600">
+            <div class="desc">Picture of Nutmeg</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="DerekPicture" height="400" src="img/input/DerekPicture.jpg" width="600">
+            <div class="desc">Picture of Derek</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="DerekPicture_nutmeg" height="400" src="img/out/hybrid/DerekPicture_nutmeg.jpg"
+                 width="600">
+            <div class="desc">Picture of DerekPicture_nutmeg</div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="img-container">
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="harry" height="400" src="img/input/harry.jpg" width="600">
+            <div class="desc">Picture of Harry</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="voldmot" height="400" src="img/input/voldmot.jpg" width="600">
+            <div class="desc">Picture of Voldemort</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="voldmot_harry" height="400" src="img/out/hybrid/voldmot_harry.jpg"
+                 width="600">
+            <div class="desc">Picture of Voldemort-harry</div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="img-container">
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="lufi" height="400" src="img/input/lufi.jpg" width="600">
+            <div class="desc">Picture of Lufi</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="naruto" height="400" src="img/input/naruto.jpg" width="600">
+            <div class="desc">Picture of Naruto</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="naruto_lufi" height="400" src="img/out/hybrid/naruto_lufi.jpg"
+                 width="600">
+            <div class="desc">Picture of Lufi-Naruto</div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="img-container">
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="berkeley" height="400" src="img/input/berkeley.jpg" width="600">
+            <div class="desc">Picture of Berkeley</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="stanford" height="400" src="img/input/stanford.jpg" width="600">
+            <div class="desc">Picture of Stanford</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="berkeley_stanford" height="400" src="img/out/hybrid/berkeley_stanford.jpg"
+                 width="600">
+            <div class="desc">Picture of Berkeley-Stanford</div>
+        </div>
+    </div>
+</div>
+
+<p>
+    Among all picture pairs I tried, the following picture is a failure example. I think reason why this fails is
+    that the edge of Miki is too strong while that of bill is not. As a result, combining them will make bill very hard
+    to appear.
+</p>
+<div class="img-container">
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="bill" height="400" src="img/input/bill.jpg" width="600">
+            <div class="desc">Picture of Bill</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="miki" height="400" src="img/input/miki.jpg" width="600">
+            <div class="desc">Picture of Miki</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="bill_miki" height="400" src="img/out/hybrid/bill_miki.jpg"
+                 width="600">
+            <div class="desc">Picture of Bill-Miki</div>
+        </div>
+    </div>
+</div>
+
+
+<p>
+    For the Voldemort-harry picture, I created a frequency analysis, and the log magnitude of the
+    Fourier transform plot is shown as follows
+</p>
+
+
+<div class="img-container">
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="high_FT" height="400" src="img/out/hybrid/high_FT.jpg" width="600">
+            <div class="desc">High Freq Image</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="highFreq_FT" height="400" src="img/out/hybrid/highFreq_FT.jpg" width="600">
+            <div class="desc">High Freq Image after Filter</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="low_FT" height="400" src="img/out/hybrid/low_FT.jpg" width="600">
+            <div class="desc">Low Freq Image</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="lowFreq_FT" height="400" src="img/out/hybrid/lowFreq_FT.jpg" width="600">
+            <div class="desc">Low Freq Image after Filter</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="hy_FT" height="400" src="img/out/hybrid/hy_FT.jpg" width="600">
+            <div class="desc">Hybrid image</div>
+        </div>
+    </div>
+</div>
+
+<p>
+    For Bells & Whistles, I tried out use color for different component and see which result in best effect. As we
+    can see in the results, the best way to enhance the effect is to use gray-scale picture for the one we use for
+    low-frequency and use colored picture for the one we use for high-frequency.
+</p>
+
+<div class="img-container">
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="high_FT" height="400" src="img/out/hybrid/voldmot_harry.jpg" width="600">
+            <div class="desc">Both Gray</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="highFreq_FT" height="400" src="img/out/hybrid/voldmot_harry_highcolor.jpg" width="600">
+            <div class="desc">High Freq Image Colored</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="low_FT" height="400" src="img/out/hybrid/voldmot_harry_lowcolor.jpg" width="600">
+            <div class="desc">Low Freq Image Colored</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="lowFreq_FT" height="400" src="img/out/hybrid/voldmot_harry_allcolor.jpg" width="600">
+            <div class="desc">Both Colored</div>
+        </div>
+    </div>
+</div>
+
+<h3>2.3 Gaussian and Laplacian Stacks</h3>
+<p>The Gaussian and Laplacian Stack results are shown as follows</p>
+
+<div class="big-img-container">
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/dali_gau0.jpg" width="600">
+                <div class="desc">Gaussian Stack at Layer 1</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/dali_gau1.jpg" width="600">
+                <div class="desc">Gaussian Stack at Layer 2</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/dali_gau2.jpg" width="600">
+                <div class="desc">Gaussian Stack at Layer 3</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/dali_gau3.jpg" width="600">
+                <div class="desc">Gaussian Stack at Layer 4</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/dali_gau4.jpg" width="600">
+                <div class="desc">Gaussian Stack at Layer 5</div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/dali_lap0.jpg" width="600">
+                <div class="desc">Laplacian Stack at Layer 1</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/dali_lap1.jpg" width="600">
+                <div class="desc">Laplacian Stack at Layer 2</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/dali_lap2.jpg" width="600">
+                <div class="desc">Laplacian Stack at Layer 3</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/dali_lap3.jpg" width="600">
+                <div class="desc">Laplacian Stack at Layer 4</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/dali_lap4.jpg" width="600">
+                <div class="desc">Laplacian Stack at Layer 5</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/dali_lap5.jpg" width="600">
+                <div class="desc">Laplacian stack's Extra Layer with Gaussian Filter</div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="big-img-container">
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/voldmot_harry_gau0.jpg" width="600">
+                <div class="desc">Gaussian Stack at Layer 1</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/voldmot_harry_gau1.jpg" width="600">
+                <div class="desc">Gaussian Stack at Layer 2</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/voldmot_harry_gau2.jpg" width="600">
+                <div class="desc">Gaussian Stack at Layer 3</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/voldmot_harry_gau3.jpg" width="600">
+                <div class="desc">Gaussian Stack at Layer 4</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/voldmot_harry_gau4.jpg" width="600">
+                <div class="desc">Gaussian Stack at Layer 5</div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/voldmot_harry_lap0.jpg" width="600">
+                <div class="desc">Laplacian Stack at Layer 1</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/voldmot_harry_lap1.jpg" width="600">
+                <div class="desc">Laplacian Stack at Layer 2</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/voldmot_harry_lap2.jpg" width="600">
+                <div class="desc">Laplacian Stack at Layer 3</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/voldmot_harry_lap3.jpg" width="600">
+                <div class="desc">Laplacian Stack at Layer 4</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/voldmot_harry_lap4.jpg" width="600">
+                <div class="desc">Laplacian Stack at Layer 5</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bill" height="400" src="img/out/stack/voldmot_harry_lap5.jpg" width="600">
+                <div class="desc">Laplacian stack's Extra Layer with Gaussian Filter</div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<h3>2.4 Multiresolution Blending</h3>
+<p>
+    In this part we implement multiresolution binding. The process includes building the laplacian stack for each of the
+    image and a gaussian stack for the mask image. Thereafter, we combine the two masked images. The process can be
+    illustate
+    by the pictures below:
+</p>
+
+
+<div class="big-img-container">
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="apple" height="400" src="img/input/apple.jpeg" width="600">
+                <div class="desc">Original</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="apple0" height="400" src="img/out/bind/apple_orange_left0.jpg" width="600">
+                <div class="desc">Apple Picture at layer 0</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="apple1" height="400" src="img/out/bind/apple_orange_left1.jpg" width="600">
+                <div class="desc">Apple Picture at layer 1</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="apple2" height="400" src="img/out/bind/apple_orange_left2.jpg" width="600">
+                <div class="desc">Apple Picture at layer 2</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="apple3" height="400" src="img/out/bind/apple_orange_left3.jpg" width="600">
+                <div class="desc">Apple Picture at layer 3</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="apple4" height="400" src="img/out/bind/apple_orange_left4.jpg" width="600">
+                <div class="desc">Apple Picture at layer 4</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="apple5" height="400" src="img/out/bind/apple_orange_left5.jpg" width="600">
+                <div class="desc">Apple Picture at layer 5</div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="orange" height="400" src="img/input/orange.jpeg" width="600">
+                <div class="desc">Original</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="orange0" height="400" src="img/out/bind/apple_orange_right0.jpg" width="600">
+                <div class="desc">orange Picture at layer 0</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="orange1" height="400" src="img/out/bind/apple_orange_right1.jpg" width="600">
+                <div class="desc">orange Picture at layer 1</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="orange2" height="400" src="img/out/bind/apple_orange_right2.jpg" width="600">
+                <div class="desc">orange Picture at layer 2</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="orange3" height="400" src="img/out/bind/apple_orange_right3.jpg" width="600">
+                <div class="desc">orange Picture at layer 3</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="orange4" height="400" src="img/out/bind/apple_orange_right4.jpg" width="600">
+                <div class="desc">orange Picture at layer 4</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="orange5" height="400" src="img/out/bind/apple_orange_right5.jpg" width="600">
+                <div class="desc">orange Picture at layer 5</div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="img-container">
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bind0" height="400" src="img/out/bind/apple_orange_bind0.jpg" width="600">
+                <div class="desc">bind Picture at layer 0</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bind1" height="400" src="img/out/bind/apple_orange_bind1.jpg" width="600">
+                <div class="desc">bind Picture at layer 1</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bind2" height="400" src="img/out/bind/apple_orange_bind2.jpg" width="600">
+                <div class="desc">bind Picture at layer 2</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bind3" height="400" src="img/out/bind/apple_orange_bind3.jpg" width="600">
+                <div class="desc">bind Picture at layer 3</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bind4" height="400" src="img/out/bind/apple_orange_bind4.jpg" width="600">
+                <div class="desc">bind Picture at layer 4</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <img alt="bind5" height="400" src="img/out/bind/apple_orange_bind5.jpg" width="600">
+                <div class="desc">bind Picture at layer 5</div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<p> The following are some crazy ideas and irregular masks</p>
+
+<div class="img-container">
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="ucb" height="400" src="img/input/berkeley346.jpg" width="600">
+            <div class="desc">Original UCB</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="ucb0" height="400" src="img/input/ucla.jpg" width="600">
+            <div class="desc">Original UCLA</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="ucb2" height="400" src="img/out/bind/ucb_ucla_bind5.jpg" width="600">
+            <div class="desc">Go Double Bears!</div>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="img-container">
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="ucb" height="400" src="img/input/star_520280.jpg" width="600">
+            <div class="desc">Original Star</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="ucb0" height="400" src="img/input/lava.jpg" width="600">
+            <div class="desc">Original Lava</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="ucb1" height="400" src="img/input/star_mask.jpg" width="600">
+            <div class="desc">Irregular Mask</div>
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <img alt="ucb2" height="400" src="img/out/bind/star_lava_bind5.jpg" width="600">
+            <div class="desc">Always love looking at LAVA!</div>
+        </div>
+    </div>
+</div>
+<br>
+</body>
+</html>
